@@ -2,14 +2,48 @@ Feature: Register
 
 feature states : [Registerd Customer , New Customer]
 
-Test-Technique(s): [EP(Equivalence Partitioning),state transition]
-Number of testcases : 
-Explaniation(s): 
+Test-Technique(s): Boundary Value Analysis, Equivalence Partitioning.
+
+BVA: 
+ for: First name ,Last Name ,Address1 ,City ,Zip Code,Login name,Password,Confirm password
+ -minVal: 1 Chars
+ -Max-Val: 32 Chars
+-explaination: we need to take Boundary values either valid or invalid ,
+              like [min-1,min,min+1,nominal,max-1,max,max+1]
+
+-Number of testcases: 56 =>[7 for firstname,
+                          7 for lastname,
+                          7 for Address1,
+                          7 for city,
+                          7 for Zip code ,
+                          7 for loginname,
+                          7 for password,
+                          7 for confirm password]
+
+EP: 
+ for: Email
+-vlid: email with @ symbol
+-invalid: email without @ symbol 
+-invalid: email with two @ symbols 
+-Number of testcases: 3
+
+
+
+
+
+Number of testcases : 20+ testcases (3 are valid and rest are invalid test cases) 
+Valid Scenarios:
+  -First: register new customer with valid data with all fields.
+  -Second: register new customer with valid data with all required fields.
+  -Third: register new customer with valid data with all required fields and some of optional ones.
+
+Invalid Scenarios:
+  -First: re-Register a registerd Customer.
+  -Second: register a new Customer with blank Firstname input field
+  -Third: register a new Customer  with invalid first name format
 
 
 
 
 
 
-
-ideas: we have some cases between stats we need here state transition test Technique

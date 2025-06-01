@@ -1,7 +1,7 @@
 Feature : Login
 feature states : [Logged in Customer , Logged out Customer]
 
-Test-Technique(s): [EP(Equivalence Partitioning),state transition]
+Test-Technique(s): some of black box testing Techniques
 Number of testcases : 
-Explaniation(s): 
+ 
 
