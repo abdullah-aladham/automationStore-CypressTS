@@ -1,0 +1,15 @@
+Feature: Register 
+
+feature states : [Registerd Customer , New Customer]
+
+Test-Technique(s): [EP(Equivalence Partitioning),state transition]
+Number of testcases : 
+Explaniation(s): 
+
+
+
+
+
+
+
+ideas: we have some cases between stats we need here state transition test Technique

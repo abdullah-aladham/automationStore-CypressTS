@@ -1,0 +1,13 @@
+Feature: Register
+
+
+Scenario: Register new User with valid data
+Given: The user is not registered
+# when: User Visits the website
+when: User click on "Login or register"
+Given:    
+and: User Data is valid
+
+
+
+
