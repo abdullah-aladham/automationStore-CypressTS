@@ -31,6 +31,7 @@ EP:
 
 
 
+
 Number of testcases : 20+ testcases (3 are valid and rest are invalid test cases) 
 Valid Scenarios:
   -First: register new customer with valid data with all fields.
