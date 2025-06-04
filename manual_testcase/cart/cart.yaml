@@ -1,18 +1,18 @@
 Feature: Cart
 
-  Scenario: Apply Copoun when the copoun is valid
+  Scenario: Apply Coupon when the coupon is valid
     Given the user is on the Cart page
     And the Cart has items
-    When the user enters a valid copoun in the Copoun field
-    And clicks the "Apply Copoun" button 
+    When the user enters a valid coupon in the Copoun field
+    And clicks the "Apply Coupon" button 
     Then the sucess message "Success: Your coupon discount has been applied!" should appear
     And the discount field should appear above the "Total" field 
     And the discount should be subtracted from the Total value
 
 
-  Scenario: Apply Copoun when the copoun is invalid
+  Scenario: Apply Coupon when the coupon is invalid
     Given the user is on the Cart page
     And the Cart has items
-    When the user enters an invalid copoun in the Copoun field
-    And clicks the "Apply Copoun" button 
+    When the user enters an invalid coupon in the Coupon field
+    And clicks the "Apply Coupon" button 
     Then the error message "Error: Coupon is either invalid, expired or reached it's usage limit!" should appear
