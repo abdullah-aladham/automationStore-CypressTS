@@ -16,3 +16,19 @@ Feature: Cart
     When the user enters an invalid coupon in the Coupon field
     And clicks the "Apply Coupon" button 
     Then the error message "Error: Coupon is either invalid, expired or reached it's usage limit!" should appear
+
+  
+  Scenario: Ensure that the cart keeps its content after the user refreshes the page
+    Given the user is on the Cart page
+    And the cart contains items
+    When the user refreshes the Cart page
+    Then the Cart items should remain in the Cart page
+
+
+  Scenario: Ensure that the cart keeps its content after the user logs out and then logs in again
+    Given the user is logged in
+    And the user is on the Cart page
+    And the cart contains items
+    When the user logs out
+    And the user logs in again
+    Then the Cart items should remain in the Cart page
