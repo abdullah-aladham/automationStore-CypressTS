@@ -1,0 +1,155 @@
+name: Cypress Tests
+on:
+  push:
+    branches:
+      - main
+      - cypress-setup
+  pull_request:
+    branches:
+      - main
+jobs:
+  cypress-run-ubuntu:
+    name: Cypress Test with Allure
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Yamllint
+        uses: karancode/yamllint-github-action@master
+        with:
+          yamllint_file_or_dir: "."
+          yamllint_strict: true
+          yamllint_comment: true
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check if YAML changed but no description
+        if: github.event_name == 'pull_request'
+        run: |
+          if git diff --name-only origin/main | grep -E '\.ya?ml$'; then
+            echo "YAML file was changed."
+            DESCRIPTION=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              "${{ github.event.pull_request.url }}" | jq -r '.body')
+            if [ -z "$DESCRIPTION" ] || [ "$DESCRIPTION" = "null" ]; then
+              echo "::error file=.github/workflows::YAML was changed but PR description is empty."
+              exit 1
+            else
+              echo "PR description is present."
+            fi
+          else
+            echo "No YAML changes detected."
+          fi
+
+      - name: Install Allure
+        run: wget https://github.com/allure-framework/allure2/releases/download/2.34.0/allure_2.34.0-1_all.deb && sudo dpkg -i allure_2.34.0-1_all.deb
+
+      - name: Run ESLint
+        run: npx eslint . --ext .js,.jsx,.ts,.tsx
+
+      - name: Run Cypress with Allure
+        uses: cypress-io/github-actions@v6
+        with:
+          build: npx cypress run --env allure=true//RUN TEST
+
+      - name: Generate Allure Report
+        run: allure generate allure-results --clean -o allure-report
+
+      - name: Upload Allure Report to Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: allure-report-for-download
+          path: allure-report
+
+      - name: Upload Execution Video to Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: video-report
+          path: cypress/videos/*.mp4
+
+      - name: Upload Failed Screenshots
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: failed-screenshots
+          path: cypress/screenshots/
+
+  cypress-run-windows:
+    name: Cypress Test with Allure
+    runs-on: windows-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Yamllint
+        uses: karancode/yamllint-github-action@master
+        with:
+          yamllint_file_or_dir: "."
+          yamllint_strict: true
+          yamllint_comment: true
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install jq on Windows
+        run: choco install jq -y
+
+      - name: Check if YAML changed but no description
+        if: github.event_name == 'pull_request'
+        run: |
+          if git diff --name-only origin/main | grep -E '\.ya?ml$'; then
+            echo "YAML file was changed."
+            DESCRIPTION=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              "${{ github.event.pull_request.url }}" | jq -r '.body')
+            if [ -z "$DESCRIPTION" ] || [ "$DESCRIPTION" = "null" ]; then
+              echo "::error file=.github/workflows::YAML was changed but PR description is empty."
+              exit 1
+            else
+              echo "PR description is present."
+            fi
+          else
+            echo "No YAML changes detected."
+          fi
+
+      - name: Install Allure
+        run: choco install allure -y
+
+      - name: Run ESLint
+        run: npx eslint . --ext .js,.jsx,.ts,.tsx
+
+      - name: Run Cypress with Allure
+        uses: cypress-io/github-actions@v6
+        with:
+          build: npx cypress run --env allure=true
+
+      - name: Generate Allure Report
+        run: allure generate allure-results --clean -o allure-report
+
+      - name: Upload Allure Report to Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: allure-report-for-download
+          path: allure-report
+
+      - name: Upload Execution Video to Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: video-report
+          path: cypress/videos/*.mp4
+
+      - name: Upload Failed Screenshots
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: failed-screenshots
+          path: cypress/screenshots/
