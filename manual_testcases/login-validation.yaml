@@ -1,16 +1,26 @@
 feature: Login field validation
 
 scenarios:
-  - scenario: Show error message when login fields are empty
+  - scenario: Show error message when username field is empty
     given:
       - the user is on the login page
     when:
       - the user leaves the username field empty
-      - or the user leaves the password field empty
-      -then the user clicks the login button
+      - the user clicks the login button
     then:
-      - an error message should be displayed indicating that fields are required
-     result: passed.
+      - an error message should be displayed indicating that field is required
+    result: passed
+
+
+  - scenario: Show error message when password field is empty
+    given:
+      - the user is on the login page
+    when:
+      - the user leaves the password field empty
+      - the user clicks the login button
+    then:
+      - an error message should be displayed indicating that field is required
+    result: passed
 
   - scenario: Validate minimum password length
     given:
@@ -21,36 +31,36 @@ scenarios:
       - the user clicks the login button
     then:
       - an error message should be displayed indicating password is too short
-    result: passed.
+    result: passed
 
-  - scenario: Pressing Enter key instead of login.
+  - scenario: Pressing Enter key instead of login
     given:
       - the user is on the login page
     when:
-      - the user enters the user name and password.
+      - the user enters the username and password
       - the user presses the Enter key on the keyboard
     then:
       - the system should log in the user
-    result: failed.
+    result: failed
 
-  - scenario: Forgot Password link send an email to reset it.
+  - scenario: Forgot Password link sends an email to reset it
     given:
       - the user is on the login page
     when:
       - the user clicks on the "Forgot Password" link
     then:
       - the system should show the forgot password page
-      - the user  enter the user name and email
-      -then the user should recive an emeail to reset it.
-    result: failed.
+      - the user enters the username and email
+      - the user should receive an email to reset it
+    result: failed
 
-  - scenario: Forgot Username link send an email to reset it.
+  - scenario: Forgot Username link sends an email to reset it
     given:
       - the user is on the login page
     when:
       - the user clicks on the "Forgot Username" link
     then:
       - the system should show the forgot username page
-     - the user  enter the last name and email
-      -then the user should recive an emeail to reset it.
-      result: failed
+      - the user enters the last name and email
+      - the user should receive an email to reset it
+    result: failed
