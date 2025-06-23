@@ -65,4 +65,3 @@ scenarios:
       - the user enters the last name and email
       - the user should receive an email to reset it
     result: failed
-    
