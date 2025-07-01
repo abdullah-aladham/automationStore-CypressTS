@@ -6,14 +6,14 @@ scenarios:
     given: user is on login page
     when: user leaves username field empty
     and: user clicks login button
-    then: error message is displayed: "Username is required"
+    then: error message is displayed that Username is required
     result: passed
 
   - scenario: Show error when password field is empty
     given: user is on login page
     when: user leaves password field empty
     and: user clicks login button
-    then: error message is displayed: "Password is required"
+    then: error message is displayed that Password is required
     result: passed
 
   - scenario: Show error when password is less than 4 characters
