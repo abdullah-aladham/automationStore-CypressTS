@@ -2,47 +2,53 @@
 feature: Login field validation
 
 scenarios:
-  - scenario: Show error when username field is empty
-    given: user is on login page
-    when: user leaves username field empty
-    and: user clicks login button
-    then: error message is displayed that Username is required
+  - title: Show error when username field is empty
+    steps:
+      - given: "user is on login page"
+      - when: "user leaves username field empty"
+      - and: "user clicks login button"
+      - then: "error message is displayed that Username is required"
     result: passed
 
-  - scenario: Show error when password field is empty
-    given: user is on login page
-    when: user leaves password field empty
-    and: user clicks login button
-    then: error message is displayed that Password is required
+  - title: Show error when password field is empty
+    steps:
+      - given: "user is on login page"
+      - when: "user leaves password field empty"
+      - and: "user clicks login button"
+      - then: "error message is displayed that Password is required"
     result: passed
 
-  - scenario: Show error when password is less than 4 characters
-    given: user is on login page
-    when: user enters valid username
-    and: user enters password with less than 4 characters
-    and: user clicks login button
-    then: error message is displayed: "Password is too short"
+  - title: Show error when password is less than 4 characters
+    steps:
+      - given: "user is on login page"
+      - when: "user enters valid username"
+      - and: "user enters password with less than 4 characters"
+      - and: "user clicks login button"
+      - then: "error message is displayed that Password is too short"
     result: passed
 
-  - scenario: Login with Enter key instead of button
-    given: user is on login page
-    when: user enters valid username and password
-    and: user presses Enter key
-    then: user should be logged in
+  - title: Login with Enter key instead of button
+    steps:
+      - given: "user is on login page"
+      - when: "user enters valid username and password"
+      - and: "user presses Enter key"
+      - then: "user should be logged in"
     result: failed
 
-  - scenario: Reset password using Forgot Password link
-    given: user is on login page
-    when: user clicks "Forgot Password" link
-    then: forgot password page is displayed
-    and: user enters username and email
-    and: reset password email is sent
+  - title: Reset password using Forgot Password link
+    steps:
+      - given: "user is on login page"
+      - when: 'user clicks "Forgot Password" link'
+      - then: "forgot password page is displayed"
+      - and: "user enters username and email"
+      - and: "reset password email is sent"
     result: failed
 
-  - scenario: Recover username using Forgot Username link
-    given: user is on login page
-    when: user clicks "Forgot Username" link
-    then: forgot username page is displayed
-    and: user enters last name and email
-    and: username recovery email is sent
+  - title: Recover username using Forgot Username link
+    steps:
+      - given: "user is on login page"
+      - when: 'user clicks "Forgot Username" link'
+      - then: "forgot username page is displayed"
+      - and: "user enters last name and email"
+      - and: "username recovery email is sent"
     result: failed
