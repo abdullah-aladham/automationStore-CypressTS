@@ -21,5 +21,5 @@ Scenarios:
       - when: User Navigates to register page
       - and: submits some invalid data format in some input field (first name out of maximum limit)
       - and: User proceeds to signup with clicking on Continue button
-      - then:  signup fails with First Name label is and input field border are red colored
+      - then: signup fails with First Name label is and input field border are red colored
               and warning message with :"First Name must be between 1 and 32 characters!" appears under input.
