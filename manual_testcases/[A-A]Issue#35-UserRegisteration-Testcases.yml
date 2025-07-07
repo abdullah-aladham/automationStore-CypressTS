@@ -1,0 +1,25 @@
+---
+Feature: Register
+
+Shared:
+  Scenarios:
+  -title: User Navigates to register page
+  steps:
+    - Given: Unregistered new User is on homepage
+    - when: Clicks on "Login or register"
+    - and: finds and Clicks on "Continue" button.
+
+Scenarios:
+  - title: Unregistered new User Registers Successfully
+    steps:
+      - when: User Navigates to register page
+      - and: submits all data input fields with valid data format.
+      - then: the user is registered and will be logged in immediately.
+
+  - title: Invalid Registration for Unregistered new User
+    steps:
+      - when: User Navigates to register page
+      - and: submits some invalid data format in some input field (first name out of maximum limit)
+      - and: User proceeds to signup with clicking on Continue button
+      - then: signup fails with First Name label is and input field border are red colored
+              and warning message with :"First Name must be between 1 and 32 characters!" appears under input.
