@@ -5,11 +5,11 @@ class CartPage{
 
     elements =
     {
-        
+        cartList: ()=> cy.get(".product-list"),
     }
 
-    checkSingleProductAddedToCart() {
-       cy.get(".product-list").should("contain","Skinsheen Bronzer Stick")  //product should be added to the cart
+    checkSingleProductAddedToCart(productName) {
+       this.elements.cartList().should("contain",productName)  //product should be added to the cart
     }
 
 }
