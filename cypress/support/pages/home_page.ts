@@ -9,7 +9,7 @@ class HomePage {
         {
 
             loginPageBtn: () => cy.contains('a', 'Login or register'),
-            addToCartBtn: (productName) => cy.contains(".container-fluid",productName).children().contains("div",productName).parent().parent().find(".productcart"),
+            addToCartBtn: (productName) => cy.contains("div",productName).parent().parent().find(".productcart"),
             productCard: (productName) => cy.contains(".fixed_wrapper .prdocutname",productName),
             cartBtn: () => cy.contains('option',"Cart"),
             addedToCart: () => cy.get("a[title='Added to cart']"),

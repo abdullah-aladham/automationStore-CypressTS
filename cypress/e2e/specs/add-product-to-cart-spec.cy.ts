@@ -9,4 +9,5 @@ describe('Add Products to Cart test suite', () => {
         const cart_page = home_page.goToCartPage();
         cart_page.checkSingleProductAddedToCart(selectedProduct);
     });
+
 });
