@@ -45,6 +45,12 @@ class HomePage {
         return new CartPage();
     }
 
+    addMultipleProductsToCart(products){
+       products.forEach(product => {
+        this.addSingleProductToCart(product); 
+       });
+    }
+
 }
 
 export default HomePage;
