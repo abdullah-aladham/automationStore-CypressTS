@@ -12,5 +12,10 @@ class CartPage{
        this.elements.cartList().should("contain",productName)  //product should be added to the cart
     }
 
+    checkMultipleProductAddedToCart(products) {
+    products.forEach(product => {
+        this.elements.cartList().should("contain",product)  //products should be added to the cart
+    });
+    }
 }
 export default CartPage;
