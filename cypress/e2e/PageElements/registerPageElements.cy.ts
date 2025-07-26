@@ -1,5 +1,8 @@
+import User from '../shared_entites/user'
 class registerPageElements
 {
+  private static test_user:User =new User();
+
 elements    = {
     FirstName : ()=>cy.get("#AccountFrm_firstname"),
     LastName : ()=>cy.get('input[name="lastname"]'),
@@ -18,72 +21,19 @@ elements    = {
 PasswordConfirm:()=>cy.get('input[name="confirm"]'),
  Subscribe:()=>cy.get('input[name=""'),//will be fixed later
 privacyPolicy:()=>cy.get('input[name="agree"]'),
+registerbtn:()=>cy.get('input').contains('title="Continue"'),
 errorMsg1:()=>cy.contains("div",)
 
 }
-_register(firstName:string, 
-    lastName:string,
-    email:string,
-    telephone:string,
-    fax:string,
-    company:string,
-    address1:string,
-    address2:string,
-    city:string,
-    region_State:string,
-    zipCode:string,
-    country:string,
-    loginname:string,
-    password:string,
-    passwordConfirm:string,
-    subscribe:string,
-    privacyPolicy:string
-){
-    this.elements.FirstName().type(firstName);
-this.elements.LastName().type(lastName);
-this.elements.Telephone().type(telephone);
-this.elements.Email().type(email);
-this.elements.Telephone().type(telephone);
-this.elements.Fax().type(fax);
-this.elements.Company().type(company);
-this.elements.Address1().type(address1);
-this.elements.Address2().type(address2);
-this.elements.city().type(city);
-this.elements.Region_State().type(region_State);
-this.elements.ZIPCode().type(zipCode);
-this.elements.Country().type(country);
-this.elements.Loginname().type(loginname);
-this.elements.Password().type(password);
-this.elements.PasswordConfirm().type(passwordConfirm);
-this.elements.Subscribe().type(subscribe);
-this.elements.privacyPolicy().type(privacyPolicy);
-
-
+_Register(){
+    this.elements.FirstName.type
+}
+public  Register_New_User= ()=>{
+  this._Register();
+//   cy.intercept("/",);
 
 }
-Register_New_User(firstName:string, 
-    lastName:string,
-    email:string,
-    telephone:string,
-    fax:string,
-    company:string,
-    address1:string,
-    address2:string,
-    city:string,
-    region_State:string,
-    zipCode:string,
-    country:string,
-    loginname:string,
-    password:string,
-    passwordConfirm:string,
-    subscribe:string,
-    privacyPolicy:string){
-    this._register(firstName,lastName,email,telephone,fax,company,address1,address2,city,region_State,zipCode,country,loginname,password,passwordConfirm,subscribe,privacyPolicy);
-}
-//   RegisterNewUser(){
-// this._register(firstName,lastName,email,telephone,fax,company,address1,address2,city,region_State,zipCode,country,loginname,password,passwordConfirm,subscribe,privacyPolicy);
 
-// }
 }
 
 
